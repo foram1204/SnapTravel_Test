@@ -1,0 +1,752 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE Report
+[
+<!ELEMENT Report (General ,(Doc|BPT)) >
+<!ATTLIST Report ver CDATA #REQUIRED tmZone CDATA #REQUIRED>
+
+<!ELEMENT General ( DocLocation ) >
+<!ATTLIST General productName CDATA #REQUIRED productVer CDATA #REQUIRED os CDATA #REQUIRED host CDATA #REQUIRED qcserver CDATA #IMPLIED qcproject CDATA #IMPLIED SolManSolutionId CDATA #IMPLIED SolManProjectId CDATA #IMPLIED SolManTestPlanId CDATA #IMPLIED SolManTestPackageId CDATA #IMPLIED SolManUserInfoData CDATA #IMPLIED  >
+
+<!ELEMENT BPT (DName,Res,DVer?,TSet?,TInst?,NodeArgs,AdditionalInfo*,Doc*) >
+<!ATTLIST BPT rID ID #REQUIRED >
+
+<!ELEMENT Doc (DName,ConfName?,Res,DVer?,TSet?,TInst?,RunType?,DT?,AdditionalInfo*,Step*,DIter*,Step*,Action*,Doc*,Summary?,TestMaintenanceSummary*,NodeArgs?) >
+<!ATTLIST Doc rID ID #REQUIRED type (Test|BC|BPTWrapperTest|Flow|Group|Action) "Test" productName CDATA #REQUIRED BCIter CDATA #IMPLIED >
+
+<!ELEMENT RunType ( #PCDATA )>
+<!ATTLIST RunType fmStep (False|True) "False" batch (False|True) "False" upDesc (False|True) "False" upChk (False|True) "False" upAS (False|True) "False">
+
+<!ELEMENT DName ( #PCDATA ) >
+
+<!ELEMENT ConfName ( #PCDATA ) >
+
+<!ELEMENT Res ( #PCDATA ) >
+
+<!ELEMENT AdditionalInfo (AdditionalDataName,AdditionalDataValue ) >
+
+<!ELEMENT AdditionalDataName ( #PCDATA ) >
+
+<!ELEMENT AdditionalDataValue ( #PCDATA ) >
+
+<!ELEMENT DVer ( #PCDATA ) >
+
+<!ELEMENT TSet ( #PCDATA ) >
+
+<!ELEMENT TInst ( #PCDATA ) >
+
+<!ELEMENT DIter (Step*,Action+,Summary?,NodeArgs)>
+<!ATTLIST DIter rID ID #REQUIRED iterID CDATA #REQUIRED>
+
+<!ELEMENT DocLocation ( #PCDATA )>
+
+<!ELEMENT Action (AName,AIter*,(Step|HtmlStep|Action)*, Summary,ActionMaintenanceSummary*, NodeArgs ) >
+<!ATTLIST Action rID ID #REQUIRED>
+
+<!ELEMENT AIter ((Step|HtmlStep|Action)*,DataMapping?, Summary?,NodeArgs) >
+<!ATTLIST AIter rID ID #REQUIRED iterID CDATA #REQUIRED isCountable (False|True) "False" >
+
+<!ELEMENT AName ( #PCDATA ) >
+
+<!ELEMENT TestMaintenanceSummary (ActionMaintenanceSummary*) >
+<!ATTLIST TestMaintenanceSummary ObjectsAdded CDATA #REQUIRED ObjectsUpdated CDATA #REQUIRED StepsUpdated CDATA #REQUIRED StepsComments CDATA #REQUIRED><!ELEMENT ActionMaintenanceSummary (ObjectChange* ) >
+<!ATTLIST ActionMaintenanceSummary Action CDATA #REQUIRED Objects CDATA #REQUIRED Updated CDATA #REQUIRED LinesTotal CDATA #REQUIRED Added CDATA #REQUIRED LinesUpdated CDATA #REQUIRED>
+
+<!ELEMENT ObjectChange  (Hierarchy, PropertyChangeList* ) >
+<!ATTLIST ObjectChange Operation CDATA #IMPLIED OriginalRepository CDATA #IMPLIED>
+
+<!ELEMENT PropertyChangeList (PropertyDef*) >
+
+<!ELEMENT PropertyDef (OriginalValue, NewValue) >
+<!ATTLIST PropertyDef PropName CDATA #REQUIRED OriginRegularExpression (True|False) "False" NewRegularExpression (True|False) "False" AddedProperty (True|False) "False" >
+
+<!ELEMENT OriginalValue ( #PCDATA )>
+
+<!ELEMENT NewValue ( #PCDATA )>
+
+<!ELEMENT Hierarchy  (ObjectName, Hierarchy*) >
+<!ATTLIST Hierarchy MicClass CDATA #REQUIRED>
+
+<!ELEMENT ObjectName  ( #PCDATA ) >
+
+<!ELEMENT Step (Obj,Details,Time,TimeTick* ,(Step|HtmlStep|Doc)*, DataMapping?, NodeArgs) >
+<!ATTLIST Step rID ID #REQUIRED retval CDATA #IMPLIED>
+
+<!ELEMENT HtmlStep (HTML,TimeTick*,(Step|HtmlStep|Doc)*,NodeArgs) >
+<!ATTLIST HtmlStep rID ID #REQUIRED >
+
+<!ELEMENT Obj ( #PCDATA ) >
+<!ATTLIST Obj plainTxt (False|True) "True">
+
+<!ELEMENT Details ( #PCDATA ) >
+<!ATTLIST Details plainTxt (False|True) "True">
+
+<!ELEMENT Time ( #PCDATA ) >
+
+<!ELEMENT HTML ( #PCDATA ) >
+
+<!ELEMENT Disp ( #PCDATA ) >
+
+<!ELEMENT TimeTick ( #PCDATA ) >
+
+<!ELEMENT DataMapping ( DataMappedItem* )>
+<!ELEMENT DataMappedItem EMPTY >
+<!ATTLIST DataMappedItem dsName CDATA #REQUIRED >
+<!ATTLIST DataMappedItem rowId CDATA #REQUIRED >
+
+<!ELEMENT NodeArgs (Disp,TopPane?,BtmPane?,ExtendedInfo? )>
+<!ATTLIST NodeArgs eType CDATA #REQUIRED icon CDATA #REQUIRED nRep CDATA #REQUIRED UserNote CDATA #IMPLIED filter (False|True) "True">
+<!ATTLIST NodeArgs status (Passed|Failed|Done|Warning|Information) "Done">
+<!ATTLIST NodeArgs iconSel CDATA #IMPLIED nType CDATA #IMPLIED MovieMarker CDATA "">
+<!ATTLIST NodeArgs Source CDATA #IMPLIED SourceLine CDATA #IMPLIED StepFlowItemKey CDATA #IMPLIED >
+
+<!ELEMENT TopPane (Path)>
+
+<!ELEMENT BtmPane ( (Path|WR)?,ASHilite?)>
+<!ATTLIST BtmPane vType CDATA "HTML">
+
+<!ELEMENT Path ( #PCDATA ) >
+
+<!ELEMENT ASHilite ( #PCDATA ) >
+
+<!ELEMENT WR ( #PCDATA ) >
+
+<!ELEMENT ExtendedInfo ( StepData ) >
+
+<!ATTLIST ExtendedInfo StepType CDATA #REQUIRED>
+<!ELEMENT DT (NodeArgs) >
+<!ATTLIST DT rID ID #REQUIRED>
+
+<!ELEMENT Summary (Param*)>
+<!ATTLIST Summary sTime CDATA #IMPLIED eTime CDATA #IMPLIED passed CDATA #IMPLIED failed CDATA #IMPLIED warnings CDATA #IMPLIED retval CDATA #IMPLIED stopped (False|True) "False" >
+
+<!ELEMENT Param (ParamName,ParamVal)+ >
+<!ATTLIST Param paramInOut (In|Out) "In">
+
+<!ELEMENT ParamName ( #PCDATA ) >
+
+<!ELEMENT ParamVal ( #PCDATA ) >
+
+]
+>
+<Report ver="2.0" tmZone="Eastern Standard Time">
+<General productName="HP Unified Functional Testing" productVer="12.02" os="Windows 2008 R2" host="DVW-CTXDCT01"><DocLocation><![CDATA[H:\Project1\Driver Scripts\Driver]]></DocLocation></General>
+<Doc rID="T1"   productName= "HP Unified Functional Testing"  >
+<DName><![CDATA[Driver]]></DName>
+<Res><![CDATA[Res1]]></Res>
+<DT rID="T2">
+<NodeArgs eType="Table" icon="2" nRep="4" filter="False" >
+<Disp><![CDATA[Run-Time Data Table]]></Disp>
+<BtmPane vType="Table" >
+<Path><![CDATA[Default.xls]]></Path>
+</BtmPane>
+</NodeArgs>
+</DT>
+<Action rID="T3">
+<AName><![CDATA[Action1]]></AName>
+<Step rID="T4">
+<Obj plainTxt="False" ><![CDATA[LoadFunctionLibrary]]></Obj>
+<Details plainTxt="False" ><![CDATA[LoadFunctionLibrary function passed]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:06]]></Time>
+<TimeTick>1563023886</TimeTick>
+<NodeArgs eType="Replay" icon="4" nRep="7" status="Passed" MovieMarker="MARK253" Source="Action1" SourceLine="-1" >
+<Disp><![CDATA[LoadFunctionLibrary]]></Disp>
+</NodeArgs>
+</Step>
+<Action rID="T5">
+<AName><![CDATA[Action1 [LaunchApplication]]]></AName>
+<Step rID="T6">
+<Obj plainTxt="False" ><![CDATA[SystemUtil]]></Obj>
+<Details plainTxt="False" ><![CDATA[SystemUtil]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:09]]></Time>
+<TimeTick>1563023889</TimeTick>
+<Step rID="T7">
+<Obj plainTxt="False" ><![CDATA[Run "iexplore.exe",3]]></Obj>
+<Details plainTxt="False" ><![CDATA[Run "iexplore.exe",3]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:09]]></Time>
+<TimeTick>1563023889</TimeTick>
+<NodeArgs eType="Replay" icon="6" nRep="12" status="Passed" MovieMarker="MARK256" >
+<Disp><![CDATA[Run "iexplore.exe",3]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Replay" icon="6" nRep="11" status="Passed" MovieMarker="MARK255" >
+<Disp><![CDATA[SystemUtil]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T8">
+<Obj plainTxt="False" ><![CDATA[brSearch]]></Obj>
+<Details plainTxt="False" ><![CDATA[Browser]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<Step rID="T9">
+<Obj plainTxt="False" ><![CDATA[pgSearch]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<Step rID="T10">
+<Obj plainTxt="False" ><![CDATA[SearchHotels.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="16" MovieMarker="MARK257" >
+<Disp><![CDATA[SearchHotels.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="15" >
+<Disp><![CDATA[pgSearch]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T11">
+<Obj plainTxt="False" ><![CDATA[Notification.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<NodeArgs eType="Replay" icon="10" nRep="17" MovieMarker="MARK258" >
+<Disp><![CDATA[Notification.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T12">
+<Obj plainTxt="False" ><![CDATA[Notification]]></Obj>
+<Details plainTxt="False" ><![CDATA[WinObject]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<Step rID="T13">
+<Obj plainTxt="False" ><![CDATA[No.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="20" MovieMarker="MARK259" >
+<Disp><![CDATA[No.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="10" nRep="19" >
+<Disp><![CDATA[Notification]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="14" >
+<Disp><![CDATA[brSearch]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="7/13/2019 - 9:18:09" eTime="7/13/2019 - 9:18:12" passed="1" failed="0" warnings="0" ><Param ><ParamName><![CDATA[intVisitCounter]]></ParamName><ParamVal><![CDATA[1]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="5" nRep="8" status="Passed" MovieMarker="MARK254" >
+<Disp><![CDATA[Action1 [LaunchApplication] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T14">
+<AName><![CDATA[Action1 [Search]]]></AName>
+<Step rID="T15">
+<Obj plainTxt="False" ><![CDATA[brSearch]]></Obj>
+<Details plainTxt="False" ><![CDATA[Browser]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<Step rID="T16">
+<Obj plainTxt="False" ><![CDATA[pgSearch]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<Step rID="T17">
+<Obj plainTxt="False" ><![CDATA[txtSearchPlace.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:12]]></Time>
+<TimeTick>1563023892</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="27" MovieMarker="MARK261" >
+<Disp><![CDATA[txtSearchPlace.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T18">
+<Obj plainTxt="False" ><![CDATA[txtSearchPlace.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["Paris, France"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:13]]></Time>
+<TimeTick>1563023893</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="30" MovieMarker="MARK262" >
+<Disp><![CDATA[txtSearchPlace.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T19">
+<Obj plainTxt="False" ><![CDATA[btnSearchHotels.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:13]]></Time>
+<TimeTick>1563023893</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="33" MovieMarker="MARK263" >
+<Disp><![CDATA[btnSearchHotels.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="26" >
+<Disp><![CDATA[pgSearch]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T20">
+<Obj plainTxt="False" ><![CDATA[pgSearchResult]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:13]]></Time>
+<TimeTick>1563023893</TimeTick>
+<Step rID="T21">
+<Obj plainTxt="False" ><![CDATA[pgSearchResult.Sync]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:13]]></Time>
+<TimeTick>1563023893</TimeTick>
+<NodeArgs eType="Replay" icon="8" nRep="37" MovieMarker="MARK264" >
+<Disp><![CDATA[pgSearchResult.Sync]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="36" >
+<Disp><![CDATA[pgSearchResult]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T22">
+<Obj plainTxt="False" ><![CDATA[dbPopUpMsg.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object does not exist"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:18]]></Time>
+<TimeTick>1563023898</TimeTick>
+<NodeArgs eType="Replay" icon="13" nRep="39" MovieMarker="MARK265" >
+<Disp><![CDATA[dbPopUpMsg.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T23">
+<Obj plainTxt="False" ><![CDATA[pgSearchResult]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:18]]></Time>
+<TimeTick>1563023898</TimeTick>
+<Step rID="T24">
+<Obj plainTxt="False" ><![CDATA[ModifySearch.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:18]]></Time>
+<TimeTick>1563023898</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="42" MovieMarker="MARK266" >
+<Disp><![CDATA[ModifySearch.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T25">
+<Obj plainTxt="False" ><![CDATA[SortBy.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:35]]></Time>
+<TimeTick>1563023915</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="73" MovieMarker="MARK267" >
+<Disp><![CDATA[SortBy.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="41" >
+<Disp><![CDATA[pgSearchResult]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="25" >
+<Disp><![CDATA[brSearch]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="7/13/2019 - 9:18:12" eTime="7/13/2019 - 9:18:35" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[intVisitCounter]]></ParamName><ParamVal><![CDATA[1]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="5" nRep="22" MovieMarker="MARK260" >
+<Disp><![CDATA[Action1 [Search] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T26">
+<AName><![CDATA[Action1 [Select_Hotel]]]></AName>
+<Step rID="T27">
+<Obj plainTxt="False" ><![CDATA[brSearch]]></Obj>
+<Details plainTxt="False" ><![CDATA[Browser]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:37]]></Time>
+<TimeTick>1563023917</TimeTick>
+<Step rID="T28">
+<Obj plainTxt="False" ><![CDATA[pgSearchResult]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:37]]></Time>
+<TimeTick>1563023917</TimeTick>
+<Step rID="T29">
+<Obj plainTxt="False" ><![CDATA[btnViewDetails.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:37]]></Time>
+<TimeTick>1563023917</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="79" MovieMarker="MARK269" >
+<Disp><![CDATA[btnViewDetails.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T30">
+<Obj plainTxt="False" ><![CDATA[btnViewDetails.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:37]]></Time>
+<TimeTick>1563023917</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="82" MovieMarker="MARK270" >
+<Disp><![CDATA[btnViewDetails.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="78" >
+<Disp><![CDATA[pgSearchResult]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="77" >
+<Disp><![CDATA[brSearch]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T31">
+<Obj plainTxt="False" ><![CDATA[brHotelDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Browser]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:41]]></Time>
+<TimeTick>1563023921</TimeTick>
+<Step rID="T32">
+<Obj plainTxt="False" ><![CDATA[pgbrHotelDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:41]]></Time>
+<TimeTick>1563023921</TimeTick>
+<Step rID="T33">
+<Obj plainTxt="False" ><![CDATA[btnSelectRoom.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:41]]></Time>
+<TimeTick>1563023921</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="87" MovieMarker="MARK271" >
+<Disp><![CDATA[btnSelectRoom.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="86" >
+<Disp><![CDATA[pgbrHotelDetails]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="85" >
+<Disp><![CDATA[brHotelDetails]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="7/13/2019 - 9:18:36" eTime="7/13/2019 - 9:18:41" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[intVisitCounter]]></ParamName><ParamVal><![CDATA[1]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="5" nRep="75" MovieMarker="MARK268" >
+<Disp><![CDATA[Action1 [Select_Hotel] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T34">
+<AName><![CDATA[Action1 [Select_Room]]]></AName>
+<Step rID="T35">
+<Obj plainTxt="False" ><![CDATA[brHotelDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Browser]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:50]]></Time>
+<TimeTick>1563023930</TimeTick>
+<Step rID="T36">
+<Obj plainTxt="False" ><![CDATA[pgbrHotelDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:50]]></Time>
+<TimeTick>1563023930</TimeTick>
+<Step rID="T37">
+<Obj plainTxt="False" ><![CDATA[btnReserveRoom.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:50]]></Time>
+<TimeTick>1563023930</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="126" MovieMarker="MARK273" >
+<Disp><![CDATA[btnReserveRoom.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T38">
+<Obj plainTxt="False" ><![CDATA[btnReserveRoom.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:50]]></Time>
+<TimeTick>1563023930</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="129" MovieMarker="MARK274" >
+<Disp><![CDATA[btnReserveRoom.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="125" >
+<Disp><![CDATA[pgbrHotelDetails]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T39">
+<Obj plainTxt="False" ><![CDATA[pgGuestDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:54]]></Time>
+<TimeTick>1563023934</TimeTick>
+<Step rID="T40">
+<Obj plainTxt="False" ><![CDATA[GuestDetails.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:54]]></Time>
+<TimeTick>1563023934</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="138" MovieMarker="MARK275" >
+<Disp><![CDATA[GuestDetails.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="137" >
+<Disp><![CDATA[pgGuestDetails]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="124" >
+<Disp><![CDATA[brHotelDetails]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="7/13/2019 - 9:18:41" eTime="7/13/2019 - 9:18:54" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[intVisitCounter]]></ParamName><ParamVal><![CDATA[1]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="5" nRep="89" MovieMarker="MARK272" >
+<Disp><![CDATA[Action1 [Select_Room] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T41">
+<AName><![CDATA[Action1 [Enter_GuestDetails]]]></AName>
+<Step rID="T42">
+<Obj plainTxt="False" ><![CDATA[brHotelDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Browser]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:55]]></Time>
+<TimeTick>1563023935</TimeTick>
+<Step rID="T43">
+<Obj plainTxt="False" ><![CDATA[pgGuestDetails]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:55]]></Time>
+<TimeTick>1563023935</TimeTick>
+<Step rID="T44">
+<Obj plainTxt="False" ><![CDATA[GuestDetails.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:55]]></Time>
+<TimeTick>1563023935</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="144" MovieMarker="MARK277" >
+<Disp><![CDATA[GuestDetails.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T45">
+<Obj plainTxt="False" ><![CDATA[txtGuest_FirstName.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["Foram"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:55]]></Time>
+<TimeTick>1563023935</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="147" MovieMarker="MARK278" >
+<Disp><![CDATA[txtGuest_FirstName.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T46">
+<Obj plainTxt="False" ><![CDATA[txtGuest_LastName.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["Raval"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:55]]></Time>
+<TimeTick>1563023935</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="150" MovieMarker="MARK279" >
+<Disp><![CDATA[txtGuest_LastName.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T47">
+<Obj plainTxt="False" ><![CDATA[txtGuest_Email.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["test@snaptravel.com"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:56]]></Time>
+<TimeTick>1563023936</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="153" MovieMarker="MARK280" >
+<Disp><![CDATA[txtGuest_Email.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T48">
+<Obj plainTxt="False" ><![CDATA[txtGuest_PhoneNo.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["111 222 3333"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:56]]></Time>
+<TimeTick>1563023936</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="156" MovieMarker="MARK281" >
+<Disp><![CDATA[txtGuest_PhoneNo.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T49">
+<Obj plainTxt="False" ><![CDATA[GuestDetails_Next.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:57]]></Time>
+<TimeTick>1563023937</TimeTick>
+<NodeArgs eType="Replay" icon="14" nRep="159" MovieMarker="MARK282" >
+<Disp><![CDATA[GuestDetails_Next.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T50">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_CardNo.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:57]]></Time>
+<TimeTick>1563023937</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="162" MovieMarker="MARK283" >
+<Disp><![CDATA[txtGuestPayment_CardNo.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T51">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_CardNo.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["4111 1111 1111 1111"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:57]]></Time>
+<TimeTick>1563023937</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="165" MovieMarker="MARK284" >
+<Disp><![CDATA[txtGuestPayment_CardNo.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T52">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_ExpireDate.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:58]]></Time>
+<TimeTick>1563023938</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="168" MovieMarker="MARK285" >
+<Disp><![CDATA[txtGuestPayment_ExpireDate.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T53">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_ExpireDate.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["02/22"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:58]]></Time>
+<TimeTick>1563023938</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="171" MovieMarker="MARK286" >
+<Disp><![CDATA[txtGuestPayment_ExpireDate.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T54">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_CVV.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:58]]></Time>
+<TimeTick>1563023938</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="174" MovieMarker="MARK287" >
+<Disp><![CDATA[txtGuestPayment_CVV.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T55">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_CVV.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["123"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:58]]></Time>
+<TimeTick>1563023938</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="177" MovieMarker="MARK288" >
+<Disp><![CDATA[txtGuestPayment_CVV.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T56">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_NameOnCard.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:59]]></Time>
+<TimeTick>1563023939</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="180" MovieMarker="MARK289" >
+<Disp><![CDATA[txtGuestPayment_NameOnCard.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T57">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_NameOnCard.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["Foram Raval"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:59]]></Time>
+<TimeTick>1563023939</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="183" MovieMarker="MARK290" >
+<Disp><![CDATA[txtGuestPayment_NameOnCard.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T58">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_BillingAddress.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:59]]></Time>
+<TimeTick>1563023939</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="186" MovieMarker="MARK291" >
+<Disp><![CDATA[txtGuestPayment_BillingAddress.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T59">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_BillingAddress.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["test"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:18:59]]></Time>
+<TimeTick>1563023939</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="189" MovieMarker="MARK292" >
+<Disp><![CDATA[txtGuestPayment_BillingAddress.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T60">
+<Obj plainTxt="False" ><![CDATA[GuestPayment_SaveCreditDetails.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["OFF"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:00]]></Time>
+<TimeTick>1563023940</TimeTick>
+<NodeArgs eType="Replay" icon="15" nRep="192" MovieMarker="MARK293" >
+<Disp><![CDATA[GuestPayment_SaveCreditDetails.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T61">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_BillingAddress_City.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:00]]></Time>
+<TimeTick>1563023940</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="195" MovieMarker="MARK294" >
+<Disp><![CDATA[txtGuestPayment_BillingAddress_City.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T62">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_BillingAddress_City.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["Test"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:01]]></Time>
+<TimeTick>1563023941</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="198" MovieMarker="MARK295" >
+<Disp><![CDATA[txtGuestPayment_BillingAddress_City.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T63">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_BillingAddress_Zip.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:01]]></Time>
+<TimeTick>1563023941</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="201" MovieMarker="MARK296" >
+<Disp><![CDATA[txtGuestPayment_BillingAddress_Zip.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T64">
+<Obj plainTxt="False" ><![CDATA[txtGuestPayment_BillingAddress_Zip.Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["123"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:01]]></Time>
+<TimeTick>1563023941</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="204" MovieMarker="MARK297" >
+<Disp><![CDATA[txtGuestPayment_BillingAddress_Zip.Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T65">
+<Obj plainTxt="False" ><![CDATA[btnCompleteBooking.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:01]]></Time>
+<TimeTick>1563023941</TimeTick>
+<NodeArgs eType="Replay" icon="14" nRep="207" MovieMarker="MARK298" >
+<Disp><![CDATA[btnCompleteBooking.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="143" >
+<Disp><![CDATA[pgGuestDetails]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T66">
+<Obj plainTxt="False" ><![CDATA[pgBookingPopUp]]></Obj>
+<Details plainTxt="False" ><![CDATA[Page]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:03]]></Time>
+<TimeTick>1563023943</TimeTick>
+<Step rID="T67">
+<Obj plainTxt="False" ><![CDATA[BookingPopUpMsg.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:03]]></Time>
+<TimeTick>1563023943</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="212" MovieMarker="MARK299" >
+<Disp><![CDATA[BookingPopUpMsg.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T68">
+<Obj plainTxt="False" ><![CDATA[BookingPopUpOK.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[7/13/2019 - 9:19:04]]></Time>
+<TimeTick>1563023944</TimeTick>
+<NodeArgs eType="Replay" icon="14" nRep="216" MovieMarker="MARK300" >
+<Disp><![CDATA[BookingPopUpOK.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="8" nRep="211" >
+<Disp><![CDATA[pgBookingPopUp]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="142" >
+<Disp><![CDATA[brHotelDetails]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="7/13/2019 - 9:18:55" eTime="7/13/2019 - 9:19:04" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[intVisitCounter]]></ParamName><ParamVal><![CDATA[1]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="5" nRep="140" MovieMarker="MARK276" >
+<Disp><![CDATA[Action1 [Enter_GuestDetails] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T69">
+<AName><![CDATA[Action1 [CloseApplication]]]></AName>
+<Summary sTime="7/13/2019 - 9:19:05" eTime="7/13/2019 - 9:19:14" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[intVisitCounter]]></ParamName><ParamVal><![CDATA[1]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="5" nRep="222" MovieMarker="MARK301" >
+<Disp><![CDATA[Action1 [CloseApplication] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Summary sTime="7/13/2019 - 9:18:06" eTime="7/13/2019 - 9:19:16" passed="1" failed="0" warnings="0" ><Param ><ParamName><![CDATA[TestParam]]></ParamName><ParamVal><![CDATA[]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="3" nRep="6" status="Passed" MovieMarker="MARK252" >
+<Disp><![CDATA[Action1 Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Summary sTime="7/13/2019 - 9:18:02" eTime="7/13/2019 - 9:19:16" passed="2" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartTest" icon="1" nRep="3" status="Passed" >
+<Disp><![CDATA[Test Driver Summary]]></Disp>
+</NodeArgs>
+</Doc>
+</Report>
